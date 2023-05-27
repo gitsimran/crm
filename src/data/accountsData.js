@@ -98,6 +98,19 @@ const ownershipOptions = [
 	{ value: 'publicEmployed', label: 'Publicly Employed' },
 ];
 
+export const accountsFilterBy = [
+	{ value: 'none', label: 'None' },
+	{ value: 'accountName', label: 'Account name' },
+	{ value: 'accountOwner', label: 'Account owner' },
+	{ value: 'createdTime', label: 'Created time' },
+	{ value: 'website', label: 'Website' },
+	{ value: 'phone', label: 'Phone' },
+	{ value: 'industry', label: 'Industry' },
+	{ value: 'accountType', label: 'Account type' },
+	{ value: 'billingCity', label: 'Billing city' },
+	{ value: 'billingCountry', label: 'Billing country' },
+];
+
 export const accountsFormStructure = [
 	{
 		title: 'Account Information',

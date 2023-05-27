@@ -3,10 +3,12 @@ import { Button, List, Select } from 'antd';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-import { contactsData, contactsSortBy } from '../../data/contactsData';
+import { contactsData, contactsFilterData, contactsSortBy } from '../../data/contactsData';
 import ContactsListItem from './ContactsListItem';
+import FilterPanel from '../FilterPanel';
+import { FilterOutlined } from '@ant-design/icons';
 
-const Contacts = ({setEditData}) => {
+const Contacts = ({setEditData, filterValue, setFilterValue, filterType, filterInputValue}) => {
 
 	const [sortByKey, setSortByKey] = useState('none');
 	const [sortOrder, setSortOrder] = useState('ascend');
@@ -18,6 +20,7 @@ const Contacts = ({setEditData}) => {
 	  
 	const [position, setPosition] = useState('bottom');
   	const [align, setAlign] = useState('center');
+	const [isFilterActive, setIsFilterActive] = useState(false);
 
 	let addedContacts = JSON.parse(localStorage.getItem('contacts'));
 
@@ -27,9 +30,15 @@ const Contacts = ({setEditData}) => {
 	}
 
 	const data = [...addedContacts];
-	// const data = [...addedContacts, ...contactsData, ...contactsData, ...contactsData]
-	
-	const sortedData = data.sort((a, b) => {
+
+	const filteredData = data.filter(item => {
+		if (filterType === 'contacts' && filterValue !== 'none' && filterInputValue !== '') {
+			return item[filterValue]?.toLowerCase().includes(filterInputValue?.toLowerCase());
+		}
+		return true;
+	});
+
+	const sortedData = filteredData.sort((a, b) => {
 		if (sortByKey === 'none') return 0;
 		if (sortByKey === 'createdTime') {
 			if (sortOrder === 'ascend') {
@@ -56,39 +65,46 @@ const Contacts = ({setEditData}) => {
 			</div>
 			<hr />
 			<div className='sortHeader'>
-				<span style={{marginRight: '6px'}}>Sort by: </span>
-				<Select
-					placeholder="Sort by"
-					style={{ width: 120 }}
-					options={contactsSortBy}
-					onChange={(_, obj) => handleOnChange(obj)}
-				/>
-				{sortByKey !== 'none' && (
+				<div>
+					<FilterOutlined onClick={() => setIsFilterActive(!isFilterActive)} />
+				</div>
+				<div>
+					<span style={{marginRight: '6px'}}>Sort by: </span>
 					<Select
-						className='sortOrder'
-						options={[
-							{ label: 'Asc', value: 'ascend' },
-							{ label: 'Desc', value: 'descend' },
-						]}
-						defaultValue={sortOrder}
-						onChange={val => {
-							setSortOrder(val);
-						}}
-					>
-						{sortOrder === 'ascend' ? 'Desc' : 'Asc'}
-					</Select>
-				)}
+						placeholder="Sort by"
+						style={{ width: 150 }}
+						options={contactsSortBy}
+						onChange={(_, obj) => handleOnChange(obj)}
+					/>
+					{sortByKey !== 'none' && (
+						<Select
+							className='sortOrder'
+							options={[
+								{ label: 'Asc', value: 'ascend' },
+								{ label: 'Desc', value: 'descend' },
+							]}
+							defaultValue={sortOrder}
+							onChange={val => {
+								setSortOrder(val);
+							}}
+						>
+							{sortOrder === 'ascend' ? 'Desc' : 'Asc'}
+						</Select>
+					)}
+				</div>
 			</div>
 			<hr style={{marginBottom: '0'}} />
-			<List
-				pagination={{ position, align, pageSize: 10 }}
-				className='list'
-				dataSource={sortedData}
-				renderItem={(item, index) => (
-					<ContactsListItem item={item} index={index} type={'contact'} setEditData={setEditData} />
-				)}
-			/>
-		
+			<div className="mainListContainer">
+				{isFilterActive && <FilterPanel filterByOptions={contactsFilterData} setFilterValue={setFilterValue} type={'contacts'} />}
+				<List
+					pagination={{ position, align, pageSize: 10 }}
+					className='list'
+					dataSource={sortedData}
+					renderItem={(item, index) => (
+						<ContactsListItem item={item} index={index} type={'contact'} setEditData={setEditData} />
+					)}
+				/>
+			</div>
 		</>
 		
 	);

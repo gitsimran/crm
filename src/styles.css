@@ -1,3 +1,7 @@
+.list {
+	width: 100%;
+}
+
 .listItem {
 	display: flex;
 	justify-content: space-between;
@@ -174,4 +178,42 @@
 
 .subDetailValue {
 	margin-right: 10px;
+}
+
+.mainListContainer {
+	display: flex;
+}
+
+.filterContainer {
+	width: 300px;
+	border-right: 1px solid #eee;
+	padding: 15px;
+	display: flex;
+    flex-direction: column;
+}
+
+.filterContainerHidden {
+	/* transform: translateX(300px); */
+	width: 0;
+}
+
+.filterItem {
+	padding: 10px 20px;
+}
+
+.filterItem:hover {
+	background-color: #eee;
+	cursor: pointer;
+}
+
+.selectedFilter {
+	background-color: #eee;
+}
+
+.filterInput {
+	height: 36px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0 10px;
+	margin-bottom: 15px;
 }

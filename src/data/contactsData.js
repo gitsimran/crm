@@ -147,6 +147,28 @@ const leadSourceOptions = [
 
 ];
 
+export const contactsFilterData = [
+	{ label: 'None', value: 'none' },
+	{ label: 'Contact Owner', value: 'contactOwner' },
+	{ label: 'Lead Source', value: 'leadSource' },
+	{ label: 'First Name', value: 'firstName' },
+	{ label: 'Last Name', value: 'lastName' },
+	{ label: 'Account Name', value: 'accountName' },
+	{ label: 'Vendor Name', value: 'vendorName' },
+	{ label: 'Email', value: 'email' },
+	{ label: 'Title', value: 'title' },
+	{ label: 'Phone', value: 'phone' },
+	{ label: 'Department', value: 'department' },
+	{ label: 'Fax', value: 'fax' },
+	{ label: 'Mobile', value: 'mobile' },
+	{ label: 'Mailing Street', value: 'mailingStreet' },
+	{ label: 'Mailing City', value: 'mailingCity' },
+	{ label: 'Mailing State', value: 'mailingState' },
+	{ label: 'Mailing Zip', value: 'mailingZip' },
+	{ label: 'Mailing Country', value: 'mailingCountry' },
+
+]
+
 export const contactsFormStructure = [
 	{
 		title: 'Contact Information',

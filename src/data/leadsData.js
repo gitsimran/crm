@@ -265,6 +265,24 @@ const leadStatusOptions = [
 	},
 ];
 
+export const leadsFilterData = [
+	{ value: 'none', label: 'None' },
+	{ value: 'company', label: 'Company' },
+	{ value: 'firstName', label: 'First Name' },
+	{ value: 'lastName', label: 'Last Name' },
+	{ value: 'title', label: 'Title' },
+	{ value: 'leadSource', label: 'Lead Source' },
+	{ value: 'phone', label: 'Phone' },
+	{ value: 'mobile', label: 'Mobile' },
+	{ value: 'fax', label: 'Fax' },
+	{ value: 'email', label: 'Email' },
+	{ value: 'website', label: 'Website' },
+	{ value: 'street', label: 'Street' },
+	{ value: 'city', label: 'City' },
+	{ value: 'state', label: 'State' },
+	{ value: 'zipCode', label: 'Zip Code' },
+	{ value: 'country', label: 'Country' },
+]
 
 export const leadsFormStructure = [
 	{
